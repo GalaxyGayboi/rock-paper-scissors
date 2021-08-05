@@ -1,11 +1,13 @@
 // create player action variable (playerSelection)
-let playerSelection = prompt('You have three choices. Rock, Paper, or Scissors. Choose one.');
+let playerSelection = "placeholder";
 // define rock paper and scissors
-let rock = "rock"
-let paper = "paper"
-let scissors = "scissors"
+let rock = "rock";
+let paper = "paper";
+let scissors = "scissors";
 let randomNum = Math.floor(Math.random()* 3) + 1;
-// 
+// define wincounts
+let winCount = 0;
+let computerwinCount = 0;
 // randomize cpuChoice
 function computerPlay() {
     let randomNum = Math.floor(Math.random()* 3) + 1;
@@ -38,60 +40,51 @@ function playRound(playerSelection) {
         return `You lost... ${computerSelection} beats ${newplayerSelection}.`
     }
 }
-function playRound2(playerSelection) {
-    let newplayerSelection = playerSelection.toLowerCase();
-    // rock beats scissors
-    console.log(computerSelection)
-    if (newplayerSelection === "rock" && computerSelection === scissors) {
-        return "You win! Rock beats scissors."
-    // paper beats rock
-    } else if (newplayerSelection === "paper" && computerSelection === rock) {
-        return "You win! Paper beats rock."
-    // scissors beats paper
-    } else if (newplayerSelection === "scissors" && computerSelection === paper) {
-        return "You win! Scissors beats paper."
-    } else if (newplayerSelection === computerSelection) {
-        return `You tied. Derek Bot's ${computerSelection} is the same as your ${newplayerSelection}.`
-    } else {
-        return `You lost... Sadly ${computerSelection} beats ${newplayerSelection}.`
-    }
-}
-
 
 // create 5 game format 
 function game(playerSelection) {
     for (let round = 1; round <= 6; round++) {
-    
-    // add prompt for user to input their value
-    let playerSelection = prompt('You have three choices. Rock, Paper, or Scissors. Choose one.')
-    let newplayerSelection = playerSelection.toLowerCase();
-    // rock beats scissors
-    console.log(computerSelection)
+    // randomization factor
+    let randomNum = Math.floor(Math.random()* 3) + 1;
+    let computerSelection = computerPlay();
+    // Overall Tie Message
     if (round >= 6 && winCount === computerwinCount) {
         return console.log(`You tied with Derek Bot! Hey, it's better than losing.`)
+    // Overall Win Message
     }
-    if (round >= 6 && winCount >= 3) {
-        return console.log(`You beat Derek Bot ${winCount} times! You are the super winner!`)
+    else if (round >= 6 && winCount >= 3) {
+        return console.log(`You destroyed Derek Bot ${winCount} times! You are number one!`)
+    // Overall Loss Message
     }
     else if (round >= 6 && winCount <= 3) {
-        return console.log(`Derek Bot beat you ${5 - winCount} times. Better luck next time.`)
+        return console.log(`Derek Bot crushed you ${computerwinCount} times. Better luck next time.`)
     }
+    // Player Selection Prompt
+    let playerSelection = prompt('You have three choices. Rock, Paper, or Scissors. Choose one.')
+    let newplayerSelection = playerSelection.toLowerCase();
+    if (!(playerSelection === "rock" || playerSelection === "scissors" || playerSelection === "paper" )) {
+        computerwinCount++;
+        console.warn("You did not choose a valid weapon! I'm giving Bot Derek a point because you tried to cheat.");
+    }
+    // Rock beats Scissors
     else if (newplayerSelection === "rock" && computerSelection === scissors) {
         winCount++;
-        return console.log(`You win round ${round}. Rock beats scissors.`)
-    // paper beats rock
+        console.log(`You won round ${round}. Your massive boulder destroyed their pair of needles!`);
+    // Paper beats Rock
     } else if (newplayerSelection === "paper" && computerSelection === rock) {
         winCount++;
-        return console.log(`You win round ${round}. Paper beats rock.`)
-    // scissors beats paper
+        console.log(`You won round ${round}. Your intricate papyrus beat Derek Bot's tiny pebble!`);
+    // Scissors beats Paper
     } else if (newplayerSelection === "scissors" && computerSelection === paper) {
         winCount++;
-        return console.log(`You win round ${round}. Scissors beats paper.`)
+        console.log(`You won round ${round}. Your steel blades beat Derek Bot's frail sheet!`);
+    // tie event
     } else if (newplayerSelection === computerSelection) {
-        return console.log(`You tied round ${round} Derek Bot's ${computerSelection} is the same as your ${newplayerSelection}.`)
+        console.log(`You tied round ${round}. Derek Bot's relaxed ${computerSelection} is aligned with your calm ${newplayerSelection}.`);
+    // loss event
     } else {
         computerwinCount++;
-        return console.log(`You lost round ${round}... ${computerSelection} beats ${newplayerSelection}.`)
+        console.log(`You lost round ${round}... Derek Bot's mighty ${computerSelection} beats your decrepit ${newplayerSelection}.`);
     }
     }
 }
