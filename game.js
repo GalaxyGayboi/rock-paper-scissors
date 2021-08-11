@@ -1,3 +1,46 @@
+// rps-ui stuff
+// selecting results div
+const results = document.querySelector('#results');
+const currentScore = document.querySelector('#currentScore');
+const resultsText = document.createElement('p');
+    results.appendChild(resultsText);
+// button selection
+const rockButton = document.querySelector('#rockButton');
+rockButton.addEventListener('click', () => {
+  playRound("rock");
+  if (winCount >= 5)
+{
+    window.location.assign("https://www.youtube.com/watch?v=Un4p-6lzIpI");
+} else if (computerwinCount >= 5) {
+    window.location.assign("https://www.youtube.com/watch?v=cbhv3_V_Lkg");
+} else {
+}
+  
+});
+
+const paperButton = document.querySelector('#paperButton');
+paperButton.addEventListener('click', () => {
+  playRound("paper");
+  if (winCount >= 5)
+  {
+      window.location.assign("https://www.youtube.com/watch?v=Un4p-6lzIpI");
+  } else if (computerwinCount >= 5) {
+      window.location.assign("https://www.youtube.com/watch?v=cbhv3_V_Lkg");
+  } else {
+  }
+});
+
+const scissorsButton = document.querySelector('#scissorsButton');
+scissorsButton.addEventListener('click', () => {
+  playRound("scissors");
+  if (winCount >= 5)
+  {
+      window.location.assign("https://www.youtube.com/watch?v=Un4p-6lzIpI");
+  } else if (computerwinCount >= 5) {
+      window.location.assign("https://www.youtube.com/watch?v=cbhv3_V_Lkg");
+  } else {
+  }
+});
 // create player action variable (playerSelection)
 let playerSelection = "placeholder";
 // define rock paper and scissors
@@ -8,6 +51,16 @@ let randomNum = Math.floor(Math.random()* 3) + 1;
 // define wincounts
 let winCount = 0;
 let computerwinCount = 0;
+let round = 0;
+// Score Check
+const currentScoreText = document.createElement('h1')
+    currentScore.appendChild(currentScoreText);
+    currentScoreText.textContent = `Your Score: ${winCount} | Bot Derek's Score: ${computerwinCount}`;
+if (winCount >= 5)
+{
+    window.location.assign("http://www.mozilla.org");
+} else {
+}
 // randomize cpuChoice
 function computerPlay() {
     let randomNum = Math.floor(Math.random()* 3) + 1;
@@ -23,21 +76,45 @@ function computerPlay() {
 let computerSelection = computerPlay();
 // function that pits userChoice against random cpuChoice (playRound)
 function playRound(playerSelection) {
+    let randomNum = Math.floor(Math.random()* 3) + 1;
+    let computerSelection = computerPlay();
     let newplayerSelection = playerSelection.toLowerCase();
     // rock beats scissors
     console.log(computerSelection)
-    if (newplayerSelection === "rock" && computerSelection === scissors) {
-        return "You win! Rock beats scissors."
+    console.log(winCount)
+    if (newplayerSelection === "rock" && computerSelection === scissors) { 
+        winCount++;
+        round++;
+        resultsText.style.color = 'green';
+        resultsText.textContent = `You won round ${round}. Your massive boulder destroyed their pair of needles!`;
+        currentScoreText.textContent = `Your Score: ${winCount} | Bot Derek's Score: ${computerwinCount}`;
+       
     // paper beats rock
     } else if (newplayerSelection === "paper" && computerSelection === rock) {
-        return "You win! Paper beats rock."
+        winCount++;
+        round++;
+        resultsText.style.color = 'green';
+        resultsText.textContent = `You won round ${round}. Your intricate papyrus beat Derek Bot's tiny pebble!`;
+        currentScoreText.textContent = `Your Score: ${winCount} | Bot Derek's Score: ${computerwinCount}`;
     // scissors beats paper
     } else if (newplayerSelection === "scissors" && computerSelection === paper) {
-        return "You win! Scissors beats paper."
+        winCount++;
+        round++;
+        resultsText.style.color = 'green';
+        resultsText.textContent = `You won round ${round}. Your steel blades beat Derek Bot's frail sheet!`;
+        currentScoreText.textContent = `Your Score: ${winCount} | Bot Derek's Score: ${computerwinCount}`;
     } else if (newplayerSelection === computerSelection) {
-        return `You tied. Derek Bot's ${computerSelection} is the same as your ${newplayerSelection}.`
+        round++;
+        resultsText.style.color = 'blue';
+        resultsText.textContent = `You tied round ${round}. Derek Bot's relaxed ${computerSelection} is aligned with your calm ${newplayerSelection}.`;
+        currentScoreText.textContent = `Your Score: ${winCount} | Bot Derek's Score: ${computerwinCount}`;
     } else {
-        return `You lost... ${computerSelection} beats ${newplayerSelection}.`
+        computerwinCount++;
+        round++;
+        resultsText.style.color = 'red';
+        resultsText.textContent = `You lost round ${round}... Derek Bot's mighty ${computerSelection} beats your decrepit ${newplayerSelection}.`;
+        currentScoreText.textContent = `Your Score: ${winCount} | Bot Derek's Score: ${computerwinCount}`;
+        
     }
 }
 
@@ -89,3 +166,6 @@ function game(playerSelection) {
     }
 }
 // show user the result in a string i.e (you win, you lose playerSelection beats computerSelection)
+
+
+
