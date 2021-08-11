@@ -1,0 +1,29 @@
+button {
+    width: 200px;
+    height: 200px;
+    background-color: black;
+    border-radius: 10px;
+    color: white;
+    padding: 14px 28px;
+    border: 2px solid grey;
+}
+
+/* Fill image in when the user hovers over a button */
+.image_off, #rockButton:hover .image_on{
+    display:block;
+ }
+ .image_on, #rockButton:hover .image_off{
+    display:none;
+ }
+ .image_off, #scissorsButton:hover .image_on{
+    display:block;
+ }
+ .image_on, #scissorsButton:hover .image_off{
+    display:none;
+ }
+ .image_off, #paperButton:hover .image_on{
+    display:block;
+ }
+ .image_on, #paperButton:hover .image_off{
+    display:none;
+ }

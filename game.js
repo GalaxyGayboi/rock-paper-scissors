@@ -5,6 +5,7 @@ let rock = "rock";
 let paper = "paper";
 let scissors = "scissors";
 let randomNum = Math.floor(Math.random()* 3) + 1;
+let rockButton = rock;
 // define wincounts
 let winCount = 0;
 let computerwinCount = 0;
@@ -89,3 +90,20 @@ function game(playerSelection) {
     }
 }
 // show user the result in a string i.e (you win, you lose playerSelection beats computerSelection)
+
+
+
+// rps-ui stuff
+
+
+// buttons is a node list. It looks and acts much like an array.
+const buttons = document.querySelectorAll('button');
+
+// we use the .forEach method to iterate through each button
+buttons.forEach((button) => {
+
+  // and for each one we add a 'click' listener
+  button.addEventListener('click', buttonChoice => {
+    console.log(button.id);
+  });
+});
